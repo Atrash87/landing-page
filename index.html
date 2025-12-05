@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>Habit Re:coder - Transform Your Life</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --bg-primary: #0f0f23;
+            --bg-secondary: #1a1a2e;
+            --bg-card: #16213e;
+            --text-primary: #ffffff;
+            --text-secondary: #a0aec0;
+            --accent-color: #667eea;
+            --accent-light: #8b9ff5;
+            --success: #10b981;
+            --success-light: #34d399;
+            --warning: #f59e0b;
+            --gold: #fbbf24;
+            --purple: #8b5cf6;
+            --card-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            --card-shadow-hover: 0 8px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .background-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.3;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: var(--accent-color);
+            top: -100px;
+            left: -100px;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--purple);
+            bottom: -100px;
+            right: -100px;
+            animation-delay: -5s;
+        }
+
+        .orb-3 {
+            width: 300px;
+            height: 300px;
+            background: var(--success);
+            top: 50%;
+            left: 80%;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(30px, 30px) scale(1.05);
+            }
+            66% {
+                transform: translate(-20px, -20px) scale(0.95);
+            }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .hero-logo {
+            width: 500px;
+            height: 500px;
+            margin: 0 auto 40px;
+            background: linear-gradient(135deg, var(--accent-color), var(--purple));
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4);
+            animation: pulse-glow 3s infinite;
+        }
+
+                    /* Remove background everywhere */
+            .container,
+            .hero,
+            .hero-logo {
+                background: transparent !important;
+                border: none !important;
+                box-shadow: none !important;
+            }
+
+            /* Hide title + subtitle */
+            .hero h1,
+            .hero .tagline {
+                display: none !important;
+            }
+
+            /* Make sure logo scales without distortion */
+            .hero-logo img {
+                width: 100%;
+                height: auto;
+                display: block;
+            }
+
+        
+
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4);
+            }
+            50% {
+                box-shadow: 0 20px 80px rgba(102, 126, 234, 0.6);
+            }
+        }
+
+        
+
+        h1 {
+            font-size: 72px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--accent-color), var(--purple), var(--accent-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 8s infinite alternate;
+        }
+
+        @keyframes gradient-shift {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .tagline {
+            font-size: 28px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.4;
+        }
+
+        /* Tips Section */
+        .tips-section {
+            margin-bottom: 100px;
+            position: relative;
+        }
+
+        .tips-label {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(139, 92, 246, 0.2));
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 30px;
+            padding: 12px 28px;
+            margin: 0 auto 30px;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--accent-light);
+            text-align: center;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 42px;
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, var(--accent-color), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tips-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Improved Tip Cards with Better Animation */
+        .tip-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 30px 40px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            min-height: 140px;
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+        }
+
+        .tip-card.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .tip-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--card-shadow-hover);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .tip-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), var(--purple));
+            opacity: 0.8;
+        }
+
+        .tip-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent-color), var(--purple));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 20px;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+            flex-shrink: 0;
+        }
+
+        .tip-content {
+            flex: 1;
+        }
+
+        .tip-content h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        .tip-content p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 16px;
+            max-width: 800px;
+        }
+
+        /* Alternate sides for visual interest */
+        .tip-card:nth-child(odd) {
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .tip-card:nth-child(even) {
+            border-right: 4px solid var(--purple);
+        }
+
+        /* Main Features Card */
+        .main-card {
+            background: var(--bg-card);
+            border-radius: 30px;
+            padding: 60px;
+            box-shadow: var(--card-shadow-hover);
+            border: 1px solid rgba(255,255,255,0.05);
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-card h2 {
+            text-align: center;
+            font-size: 42px;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, var(--accent-color), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .features {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .features li {
+            padding: 20px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 16px;
+            color: var(--text-secondary);
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .features li:hover {
+            background: rgba(102, 126, 234, 0.1);
+            border-color: rgba(102, 126, 234, 0.3);
+            transform: translateX(10px);
+        }
+
+        .features li::before {
+            content: "⚡";
+            color: var(--gold);
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        /* Platform Buttons */
+        .platform-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 50px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 20px 40px;
+            border-radius: 16px;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-color), var(--purple));
+            color: white;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.05);
+            color: var(--text-primary);
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.2);
+            transform: translateY(-3px);
+        }
+
+        /* Warning Box */
+        .warning-box {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(245, 158, 11, 0.05));
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+            animation: warning-pulse 4s infinite;
+        }
+
+        @keyframes warning-pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(251, 191, 36, 0);
+            }
+        }
+
+        .warning-box::before {
+            content: '⚠️';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            opacity: 0.5;
+        }
+
+        .warning-box h3 {
+            color: var(--gold);
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .warning-box p {
+            color: rgba(255,255,255,0.9);
+            line-height: 1.6;
+        }
+
+        /* Email Form */
+        .email-section {
+            background: rgba(255,255,255,0.03);
+            border-radius: 24px;
+            padding: 40px;
+            border: 1px solid rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            display: none;
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .email-section h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--accent-color), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .email-section p {
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 18px 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 16px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .checkbox-group input {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--accent-color);
+        }
+
+        .skip-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .skip-link a {
+            color: var(--accent-light);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .skip-link a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        /* Download Direct Link */
+        .download-direct {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .download-direct a {
+            color: var(--accent-light);
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .download-direct a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            color: var(--text-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 48px;
+            }
+
+            .tagline {
+                font-size: 20px;
+            }
+
+            .tip-card {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+                padding: 25px;
+            }
+
+            .tip-number {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+
+            .main-card {
+                padding: 30px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .platform-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .warning-box {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="background-layer">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+        <div class="glow-orb orb-3"></div>
+    </div>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <div class="hero-logo">
+                <img src="logo.png" alt="Habit Re:coder Logo">
+            </div>
+            <h1>Habit Re:coder</h1>
+            <p class="tagline">Transform your life, one habit at a time</p>
+        </div>
+
+        <!-- Tips Section -->
+        <div class="tips-section">
+            <h2 class="section-title">Master Your Habits</h2>
+            <div class="tips-label">💡 Quick Tips</div>
+            <div class="tips-grid">
+                <!-- Rectangular tip cards -->
+                <div class="tip-card" data-delay="0">
+                    <div class="tip-number">1</div>
+                    <div class="tip-content">
+                        <h3>Do It Early in the Day</h3>
+                        <p>Completing your habit earlier reduces stress and builds momentum for the rest of your day. Morning consistency sets the tone for success.</p>
+                    </div>
+                </div>
+
+                <div class="tip-card" data-delay="150">
+                    <div class="tip-number">2</div>
+                    <div class="tip-content">
+                        <h3>Start Small & Build Gradually</h3>
+                        <p>Begin with the easiest version—even two minutes—and expand your commitment over time. Small wins create big momentum.</p>
+                    </div>
+                </div>
+
+                <div class="tip-card" data-delay="300">
+                    <div class="tip-number">3</div>
+                    <div class="tip-content">
+                        <h3>Know Your Cue</h3>
+                        <p>Identify what triggers the habit—time, emotion, or situation—to respond intentionally. Awareness is the first step to change.</p>
+                    </div>
+                </div>
+
+                <div class="tip-card" data-delay="450">
+                    <div class="tip-number">4</div>
+                    <div class="tip-content">
+                        <h3>Replace the Response</h3>
+                        <p>When a cue leads to a negative habit, substitute it with a simple positive action like walking, breathing, or drinking water.</p>
+                    </div>
+                </div>
+
+                <div class="tip-card" data-delay="600">
+                    <div class="tip-number">5</div>
+                    <div class="tip-content">
+                        <h3>Make It Convenient</h3>
+                        <p>Shape your environment to support habits: prepare tools and remove distractions. Reduce friction to increase consistency.</p>
+                    </div>
+                </div>
+
+                <div class="tip-card" data-delay="750">
+                    <div class="tip-number">6</div>
+                    <div class="tip-content">
+                        <h3>Track Once a Day</h3>
+                        <p>A simple daily check mark maintains awareness and personal accountability. What gets measured gets managed.</p>
+                    </div>
+                </div>
+
+                <div class="tip-card" data-delay="900">
+                    <div class="tip-number">7</div>
+                    <div class="tip-content">
+                        <h3>Use Gentle Accountability</h3>
+                        <p>Share your goal with someone supportive or reward yourself for steady progress. Community creates commitment.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Features Card -->
+        <div class="main-card">
+            <h2>⚡ Desktop App - 100% Offline & Private</h2>
+            
+            <ul class="features">
+                <li>Works completely offline - no internet needed</li>
+                <li>Complete privacy - data stays on your computer</li>
+                <li>No account required - start using immediately</li>
+                <li>Lightning fast - no web delays</li>
+                <li>Free forever - no subscriptions</li>
+                <li>AI-ready reports for personalized insights</li>
+            </ul>
+            
+            <div class="platform-buttons">
+                <button class="btn btn-primary" onclick="downloadWindows()">
+                    <span>🚀</span> Download for Windows
+                </button>
+            </div>
+
+            <div class="warning-box">
+                <h3>⚠️ Windows Smart Screen Alert</h3>
+                <p>
+                    Your computer may display a "Windows protected your PC" warning.
+                    This happens because I am an independent developer and not part of a major software publisher.
+                    <br><br>
+                    <strong>To continue:</strong> Click "More info" → "Run anyway".
+                    <br>
+                    Your data stays fully on your device and remains completely private.
+                </p>
+            </div>
+        </div>
+
+        <!-- Email Form -->
+        <div class="email-section" id="emailSection">
+            <h3>📧 Get Download Link & Updates</h3>
+            <p>Enter your email to receive the download link and stay updated (optional)</p>
+            
+            <form id="downloadForm" onsubmit="handleEmailSubmit(event)">
+                <input type="hidden" name="platform" id="platformInput" value="windows">
+                <input type="email" name="email" id="emailInput" class="form-control" placeholder="your@email.com" required>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" name="subscribe" value="yes" id="subscribe" checked>
+                    <label for="subscribe">Send me updates and pro tips</label>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <span>📥</span> Send Link & Download
+                </button>
+            </form>
+            
+            <div class="skip-link">
+                <a href="#" onclick="skipEmail(); return false;">Skip and download directly</a>
+            </div>
+            
+            <div class="download-direct">
+                <a href="#" id="manualDownloadLink">Having trouble? Click here for manual download</a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>© 2024 Habit Re:coder • Transform your life, one habit at a time</p>
+        </div>
+    </div>
+    
+    <script>
+        // Add this at the beginning of your <script> section
+console.log('Debug: Checking hero-logo...');
+const heroLogo = document.querySelector('.hero-logo');
+console.log('Hero logo element:', heroLogo);
+console.log('Hero logo children:', heroLogo ? heroLogo.children : 'not found');
+
+// Check if the img element exists
+const logoImg = document.querySelector('.hero-logo img');
+if (logoImg) {
+    console.log('Logo img src:', logoImg.src);
+    logoImg.onload = () => console.log('Logo loaded successfully');
+    logoImg.onerror = () => console.log('Logo failed to load');
+}
+        // YOUR EMAIL WHERE YOU'LL RECEIVE NOTIFICATIONS
+        const YOUR_EMAIL = "hasan.alatrash87@gmail.com";
+        
+        // Google Drive download link for Windows
+        const WINDOWS_DOWNLOAD_LINK = "https://drive.google.com/file/d/112TBppatnzbMC9qZvD96O7AK5uOUlF73/view?usp=sharing";
+
+        // Improved Scroll Animations with better timing
+        document.addEventListener('DOMContentLoaded', function() {
+            const tipCards = document.querySelectorAll('.tip-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const delay = parseInt(entry.target.getAttribute('data-delay')) || 0;
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, delay);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.2,
+                rootMargin: '0px 0px -80px 0px'
+            });
+
+            tipCards.forEach(card => {
+                observer.observe(card);
+            });
+        });
+
+        let directDownloadUrl = '';
+        
+        function showEmailForm() {
+            directDownloadUrl = WINDOWS_DOWNLOAD_LINK;
+            document.getElementById('manualDownloadLink').href = directDownloadUrl;
+            
+            const emailSection = document.getElementById('emailSection');
+            emailSection.style.display = 'block';
+            emailSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        
+        function downloadWindows() {
+            showEmailForm();
+        }
+        
+        function skipEmail() {
+            if (directDownloadUrl) {
+                window.open(directDownloadUrl, '_blank');
+            }
+            return false;
+        }
+
+        // Email submission handler using FormSubmit.co
+        async function handleEmailSubmit(e) {
+    e.preventDefault();
+    
+    const submitBtn = document.querySelector('#downloadForm button[type="submit"]');
+    const email = document.getElementById('emailInput').value;
+    const subscribe = document.getElementById('subscribe').checked ? 'Yes' : 'No';
+    
+    // Start download immediately
+    window.open(directDownloadUrl, '_blank');
+    
+    // Send email in background
+    fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            access_key: '9eff65ab-7688-430b-a65a-56fa360e080a',
+            subject: 'New Habit Re:coder Download',
+            from_name: 'Habit Re:coder Website',
+            message: `New download request!\n\nEmail: ${email}\nSubscribe to updates: ${subscribe}\nPlatform: Windows`
+        })
+    }).catch(() => {});
+    
+    // Show thank you
+    submitBtn.innerHTML = 'Thank you!';
+    submitBtn.disabled = true;
+    
+    // Reset after 3 seconds
+    setTimeout(() => {
+        submitBtn.innerHTML = 'Download & Subscribe';
+        submitBtn.disabled = false;
+    }, 3000);
+}
+
+        // Parallax effect for background orbs
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            document.querySelectorAll('.glow-orb').forEach((orb, index) => {
+                const speed = 0.5 + (index * 0.2);
+                const moveX = (x - 0.5) * 40 * speed;
+                const moveY = (y - 0.5) * 40 * speed;
+                orb.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
